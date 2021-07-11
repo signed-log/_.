@@ -72,14 +72,15 @@ VSCODE=code-insiders
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dnf zsh-completions adb zsh-syntax-highlighting history-substring-search colored-man-pages colorize common-aliases doctl firewalld vscode gpg-agent ssh-agent sudo pipenv python safe-paste pip keychain zsh-better-npm-completion zsh-nvm)
+plugins=(git archlinux zsh-completions adb zsh-syntax-highlighting history-substring-search colored-man-pages colorize common-aliases doctl firewalld vscode gpg-agent ssh-agent sudo pipenv python safe-paste pip keychain zsh-better-npm-completion zsh-nvm)
 
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
-zstyle :omz:plugins:keychain options --quiet
+zstyle :omz:plugins:keychain options
 zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities E8E2E5902F07A9CFE33962BD6CF8D3A4170BD77B
+zstyle :omz:plugins:keychain identities E8E2E5902F07A9CFE33962BD6CF8D3A4170BD77B id_ed25519_gitit id_ed25519_servers id_ed25519_local
+
 
 autoload -U compinit && compinit
 
@@ -87,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -119,3 +120,20 @@ zstyle ':completion:*' rehash true
 alias xclip="xclip -sel clip"
 alias python="python3"
 function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
+source $HOME/.zshenv
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/stig124/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/stig124/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/stig124/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/stig124/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
