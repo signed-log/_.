@@ -137,3 +137,16 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/stig124/.sdkman"
+[[ -s "/home/stig124/.sdkman/bin/sdkman-init.sh" ]] && source "/home/stig124/.sdkman/bin/sdkman-init.sh"
+alias xclip="xclip -selection c"
+alias cat=bat
+
+source /home/stig124/.config/broot/launcher/bash/br
+alias ls="exa --group-directories-first --all"
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"

@@ -1,0 +1,1 @@
+/home/stig124/.config/bash/.bash_logout

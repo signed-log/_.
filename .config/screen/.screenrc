@@ -1,0 +1,6 @@
+windowlist string "%4n %h%=%f"
+term screen-256color
+startup_message off
+termcapinfo xterm*|rxvt*|kterm*|Eterm* ti@:te@
+vbell off
+altscreen on

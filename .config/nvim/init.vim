@@ -32,7 +32,7 @@ let g:neoformat_basic_format_align = 1
 let g:neoformat_basic_format_retab = 1
 
 " Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
+let g:neoformat_basic_format_trim = 0
 
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 1000
@@ -48,6 +48,11 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'altercation/vim-colors-solarized'
 
+Plug 'fladson/vim-kitty'
+
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 call plug#end()
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -57,4 +62,12 @@ let g:vim_markdown_folding_disabled = 1
 syntax enable
 set background=dark
 colorscheme solarized
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
 
