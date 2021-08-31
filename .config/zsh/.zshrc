@@ -47,7 +47,7 @@ ZSH_THEME="josh"
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
 # See https://github.com/ohmyzsh/ohmyzsh/issues/5765
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -61,6 +61,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 HIST_STAMPS="dd/mm/yyyy"
+
+export DISABLE_AUTO_TITLE='true'
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -77,7 +79,7 @@ plugins=(git archlinux zsh-completions adb zsh-syntax-highlighting history-subst
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
-zstyle :omz:plugins:keychain options
+zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities E8E2E5902F07A9CFE33962BD6CF8D3A4170BD77B id_ed25519_gitit id_ed25519_servers id_ed25519_local
 
@@ -119,7 +121,7 @@ zstyle ':completion:*' rehash true
 
 alias xclip="xclip -sel clip"
 alias python="python3"
-function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
+#function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
 source $HOME/.zshenv
 
 # >>> conda initialize >>>
@@ -136,17 +138,34 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export DENO_INSTALL="$HOME/.deno"
+if [ -d $DENO_INSTALL ]; then
+export PATH="$DENO_INSTALL/bin:$PATH"
+fi
 
+if [ -f "/usr/bin/bat" ]; then
+  alias cat=bat
+fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/stig124/.sdkman"
-[[ -s "/home/stig124/.sdkman/bin/sdkman-init.sh" ]] && source "/home/stig124/.sdkman/bin/sdkman-init.sh"
-alias xclip="xclip -selection c"
-alias cat=bat
+if [ -f "/usr/bin/broot" ]; then
+  source /home/stig124/.config/broot/launcher/bash/br
+fi
 
-source /home/stig124/.config/broot/launcher/bash/br
-alias ls="exa --group-directories-first --all"
-alias t="tmux"
-alias ta="t a -t"
-alias tls="t ls"
-alias tn="t new -t"
+if [ -f "/usr/bin/exa" ]; then
+  alias ls="exa --group-directories-first --all"
+fi
+
+if [ -f "/usr/bin/tmux" ]; then
+  alias t="tmux"
+  alias ta="t a -t"
+  alias tls="t ls"
+  alias tn="t new -t"
+fi
+
+if [ -f "/usr/bin/most" ]; then
+  export PAGER=most
+fi
+
+if [ -d "/opt/cuda/bin" ]; then
+  export PATH="/opt/cuda/bin:$PATH"
+fi
