@@ -74,14 +74,14 @@ VSCODE=code-insiders
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux zsh-completions adb zsh-syntax-highlighting history-substring-search colored-man-pages colorize common-aliases doctl firewalld vscode gpg-agent ssh-agent sudo pipenv python safe-paste pip keychain zsh-better-npm-completion zsh-nvm)
+plugins=(git archlinux zsh-completions zsh-256color adb zsh-syntax-highlighting history-substring-search colored-man-pages colorize common-aliases doctl firewalld vscode gpg-agent ssh-agent sudo pipenv python safe-paste pip keychain zsh-better-npm-completion zsh-nvm)
 
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
 zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities E8E2E5902F07A9CFE33962BD6CF8D3A4170BD77B id_ed25519_gitit id_ed25519_servers id_ed25519_local
+zstyle :omz:plugins:keychain identities 4283F127DD1E0E2EA976F3C0273140E170D76BA6 id_ed25519_gitit id_ed25519_servers id_ed25519_local
 
 
 autoload -U compinit && compinit
@@ -147,9 +147,9 @@ if [ -f "/usr/bin/bat" ]; then
   alias cat=bat
 fi
 
-if [ -f "/usr/bin/broot" ]; then
-  source /home/stig124/.config/broot/launcher/bash/br
-fi
+#if [ -f "/usr/bin/broot" ]; then
+#  source /home/stig124/.config/broot/launcher/bash/br
+#fi
 
 if [ -f "/usr/bin/exa" ]; then
   alias ls="exa --group-directories-first --all"
@@ -168,4 +168,14 @@ fi
 
 if [ -d "/opt/cuda/bin" ]; then
   export PATH="/opt/cuda/bin:$PATH"
+fi
+
+export GDB_HISTFILE="$HOME/.gdb_history"
+pdfcompress ()
+{
+   gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=$1.compressed.pdf $1; 
+}
+if [ -d "$HOME/dotnet" ]; then
+export PATH=$PATH:$HOME/dotnet
+export DOTNET_ROOT=$HOME/dotnet
 fi

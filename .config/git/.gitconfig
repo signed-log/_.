@@ -24,7 +24,7 @@
 [user]
     email = stigpro@outlook.fr
     name = Nicolas stig124 FORMICHELLA
-    signingKey = E8E2E5902F07A9CFE33962BD6CF8D3A4170BD77B
+    signingKey = 4283F127DD1E0E2EA976F3C0273140E170D76BA6 
 
 [core]
     editor = nvim
@@ -37,8 +37,8 @@
 [pull]
     ff = only
 
-[mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[mergetool "lvim"]
+  cmd = lvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 
 [merge]
     tool = nvim

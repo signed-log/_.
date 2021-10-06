@@ -1096,3 +1096,4 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,zsh,visualstudio,visualstudiocode,virtualenv,jetbrains+all,libreoffice,archlinuxpackages,c,c++,fusetools,flatpak,latex,git,python
 n
+settings.json
