@@ -1,1 +1,1 @@
-/home/stig124/.config/zsh/.zshrc
+/home/stig124/.config/zsh/zrc.zsh

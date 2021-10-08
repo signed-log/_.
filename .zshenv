@@ -1,1 +1,0 @@
-/home/stig124/.config/zsh/.zshenv
