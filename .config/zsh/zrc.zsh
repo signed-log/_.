@@ -43,6 +43,7 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 # OMZ - Others
 antigen bundles <<EOBUNDLES
+  conda
   gpg-agent
   ssh-agent
   keychain
@@ -73,5 +74,25 @@ fi
 
 autoload -U compinit && compinit
 zstyle ':completion:*' rehash true
+zstyle ':completion::complete:*' gain-privileges 1
+setopt COMPLETE_ALIASES
+zstyle ':completion:*' menu select
 
+
+[[ -d /opt/asdf-vm ]] && . /opt/asdf-vm/asdf.sh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/stig124/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/stig124/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/stig124/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/stig124/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
