@@ -2,7 +2,7 @@ if [ -f $HOME/.config/zsh/zenv.zsh ]; then
   source $HOME/.config/zsh/zenv.zsh
 fi
 
-source /usr/share/zsh/share/antigen.zsh
+source $HOME/.local/bin/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -30,7 +30,7 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 # OMZ - Aliases
 antigen bundles <<EOBUNDLES
-  archlinux
+  suse
   common-aliases
   cp
   firewalld
@@ -47,7 +47,6 @@ antigen bundles <<EOBUNDLES
   gpg-agent
   ssh-agent
   keychain
-  vscode
   pipenv
   safe-paste
   sudo
@@ -83,14 +82,14 @@ zstyle ':completion:*' menu select
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/stig124/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/stig124/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/stig124/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/stig124/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/stig124/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/stig124/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/stig124/anaconda3/bin:$PATH"
+        export PATH="/home/stig124/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
