@@ -4,8 +4,8 @@ export PATH=$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
 
-export VISUAL=emacs
-export EDITOR=emacs
+export VISUAL=nvim
+export EDITOR=nvim
 
 export DISABLE_AUTO_TITLE='true'
 
@@ -38,4 +38,8 @@ if [ -n "$PYTHONPATH" ]; then
     export PYTHONPATH='/home/stig124/.local/lib/python3.9/site-packages/pdm/pep582':$PYTHONPATH
 else
     export PYTHONPATH='/home/stig124/.local/lib/python3.9/site-packages/pdm/pep582'
+fi
+
+if [[ -f "$HOME/.config/zsh/special-${HOSTNAME}.zsh" ]]; then
+  source "$HOME/.config/zsh/special-${HOSTNAME}.zsh"
 fi
