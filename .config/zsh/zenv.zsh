@@ -1,6 +1,6 @@
 #PATH
 export SPICETIFY_INSTALL="/home/stig124/spicetify-cli"
-export PATH=$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
 
@@ -28,6 +28,8 @@ if [ -d "$HOME/dotnet" ]; then
   export PATH=$PATH:$HOME/dotnet
   export DOTNET_ROOT=$HOME/dotnet
 fi
+
+DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 #Plugin config
 export VSCODE=code-insiders

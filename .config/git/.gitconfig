@@ -114,3 +114,13 @@
 	defaultBranch = main
 [fetch "fsck"]
 	badTimezone = ignore
+[apply]
+	ignoreWhitespace = change
+[rerere]
+	enabled = true
+	autoUpdate = true
+[am]
+	threeWay = true
+[log]
+	abbrevCommit = true
+	decorate = short

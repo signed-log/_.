@@ -95,3 +95,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+if [[ "$HOSTNAME" == "graytop" ]]; then
+  bindkey '^[OH' beginning-of-line
+  bindkey '^[OF' end-of-line
+fi
