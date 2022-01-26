@@ -62,7 +62,7 @@ antigen theme ohmyzsh/ohmyzsh themes/3den
 #Keychain
 zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities 4283F127DD1E0E2EA976F3C0273140E170D76BA6 id_ed25519_gitit id_ed25519_servers id_ed25519_local
+zstyle :omz:plugins:keychain identities  id_ed25519_gitit id_ed25519_servers id_ed25519_local
 
 antigen apply
 
@@ -82,20 +82,20 @@ zstyle ':completion:*' menu select
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/stig124/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/stig124/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/stig124/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/stig124/miniforge3/etc/profile.d/conda.sh"
+    if [ -f "/home/stig124/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/stig124/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/stig124/miniforge3/bin:$PATH"
+        export PATH="/home/stig124/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-if [[ "$HOSTNAME" == "graytop" ]]; then
+if [[ "$HOSTNAME" != "graytop" ]]; then
   bindkey '^[OH' beginning-of-line
   bindkey '^[OF' end-of-line
 fi
