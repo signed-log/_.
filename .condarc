@@ -1,5 +1,1 @@
-auto_activate_base: false
-channels:
-  - conda-forge
-  - defaults
-channel_priority: strict
+/home/stig124/.config/conda/condarc

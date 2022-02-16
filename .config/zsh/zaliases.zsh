@@ -20,3 +20,4 @@ pipenv-base ()
 {
   pipenv -v install --dev --pre black ipython pyright pylint coverage isort autoflake
 }
+alias ttd='tt -csv >> ~/.local/share/wpm.csv'

@@ -90,6 +90,9 @@ name = "lang#graphql"
 name = "lang#ipynb"
 
 [[layers]]
+name = "lang#ruby"
+
+[[layers]]
 name = "lsp"
 enabled_clients = ['pyright']
 

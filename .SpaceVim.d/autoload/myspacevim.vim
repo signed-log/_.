@@ -6,5 +6,6 @@ function! myspacevim#before() abort
     \ 'args': ['-q', '-'],
     \ }
     let g:neoformat_enabled_python = ['black']
+    au BufRead,BufNewFile Vagrantfile set filetype=ruby
 endfunction
 

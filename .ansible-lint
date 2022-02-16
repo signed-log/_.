@@ -1,2 +1,1 @@
-skip_list: 
-  - no-changed-when 
+.config/ansible/ansible-lint
