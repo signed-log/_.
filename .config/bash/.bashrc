@@ -13,3 +13,4 @@ export SDKMAN_DIR="/home/stig124/.sdkman"
 [[ -s "/home/stig124/.sdkman/bin/sdkman-init.sh" ]] && source "/home/stig124/.sdkman/bin/sdkman-init.sh"
 
 source /home/stig124/.config/broot/launcher/bash/br
+export PATH="$PATH:$HOME/.spicetify"
