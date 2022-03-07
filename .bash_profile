@@ -1,1 +1,0 @@
-/home/stig124/.config/bash/.bash_profile

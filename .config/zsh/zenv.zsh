@@ -1,5 +1,5 @@
 #PATH
-export SPICETIFY_INSTALL="/home/stig124/spicetify-cli"
+export SPICETIFY_INSTALL="/home/signed/spicetify-cli"
 export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
@@ -37,9 +37,9 @@ export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('lvim' 'nvim' 'emacs')
 if [ -n "$PYTHONPATH" ]; then
-    export PYTHONPATH='/home/stig124/.local/lib/python3.9/site-packages/pdm/pep582':$PYTHONPATH
+    export PYTHONPATH='/home/signed/.local/lib/python3.9/site-packages/pdm/pep582':$PYTHONPATH
 else
-    export PYTHONPATH='/home/stig124/.local/lib/python3.9/site-packages/pdm/pep582'
+    export PYTHONPATH='/home/signed/.local/lib/python3.9/site-packages/pdm/pep582'
 fi
 
 if [[ -f "$HOME/.config/zsh/special-${HOSTNAME}.zsh" ]]; then
