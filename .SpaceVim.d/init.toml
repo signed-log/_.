@@ -99,5 +99,14 @@ enabled_clients = ['pyright']
 [[layers]]
 name = "VersionControl"
 
+[[layers]]
+name = "tools"
+
+[[layers]]
+name = "tmux"
+
 [[custom_plugins]]
 repo = 'pearofducks/ansible-vim'
+
+[[custom_plugins]]
+repo = 'wakatime/vim-wakatime'

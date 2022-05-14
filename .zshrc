@@ -77,6 +77,8 @@ zstyle ':completion::complete:*' gain-privileges 1
 setopt COMPLETE_ALIASES
 zstyle ':completion:*' menu select
 
+_mkcd() { _path_files -/ }
+compdef _mkcd mkcd
 
 [[ -d /opt/asdf-vm ]] && . /opt/asdf-vm/asdf.sh
 

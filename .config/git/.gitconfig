@@ -30,6 +30,7 @@
     editor = nvim
     autocrlf = false
 	excludesfile = /home/stig124/.global_gitignore
+	sshCommand = ssh -i ~/.ssh/id_ed25519_gitit
 
 [push]
     default = simple
@@ -50,8 +51,8 @@
     gpgSign = true
 
 [color]
-    ui = always
-    diff = always
+    ui = auto
+    diff = auto
 
 [color "diff"]
     meta = yellow bold
