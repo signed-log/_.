@@ -11,6 +11,8 @@ export DISABLE_AUTO_TITLE='true'
 
 # Conditionals
 
+OSVER=$( (lsb_release -ds || cat /etc/*release || uname -om) 2>/dev/null | head -n1)
+
 if [ -f "/usr/bin/most" ]; then
   export PAGER=most
   export DELTA_PAGER=most

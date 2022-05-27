@@ -2,67 +2,63 @@ if [ -f $HOME/.config/zsh/zenv.zsh ]; then
   source $HOME/.config/zsh/zenv.zsh
 fi
 
-source $HOME/.local/bin/antigen.zsh
+# Git
+zi snippet OMZP::git
+zi snippet OMZL::git.zsh
+zi cdclear -q
 
-antigen use oh-my-zsh
+# Git [Addons]
+zi snippet OMZP::git-extras
+zi snippet OMZP::gh
+zi snippet OMZP::git-lfs
 
-#Compulsory
-antigen bundle git
+if [[ $OSVER == *"SUSE"* ]]; then
+  zi snippet OMZP::suse
+fi
 
-#Non-default library
-antigen bundles <<EOBUNDLES
-  buonomo/yarn-completion
-  chrissicool/zsh-256color
-  zsh-users/zsh-completions
-  lukechilds/zsh-better-npm-completion
-  lukechilds/zsh-nvm
-EOBUNDLES
+# GPG/SSH/Security
+zi snippet OMZP::gpg-agent
+zi snippet OMZP::ssh-agent
+zi snippet OMZP::keychain
+zi snippet OMZP::safe-paste
+zi snippet OMZP::firewalld
 
-# OMZ library - Autocomplete
-antigen bundles <<EOBUNDLES
-  ag
-  colored-man-pages
-  doctl
-  gh
-  git-extras
-  pip
-  pylint
-EOBUNDLES
-# OMZ - Aliases
-antigen bundles <<EOBUNDLES
-  suse
-  common-aliases
-  cp
-  firewalld
-  git-lfs
-  python
-  systemadmin
-  systemd
-  tmux
-  urltools
-EOBUNDLES
-# OMZ - Others
-antigen bundles <<EOBUNDLES
-  conda
-  gpg-agent
-  ssh-agent
-  keychain
-  pipenv
-  safe-paste
-  sudo
-  history-substring-search
-EOBUNDLES
+# Python
+zi snippet OMZP::pip
+zi snippet OMZP::pipenv
+zi snippet OMZP::python
+zi snippet OMZP::pylint
+zi snippet OMZP::conda
 
-#Pinned
-antigen bundle zsh-users/zsh-syntax-highlighting
+# Sysadmin
+zi snippet OMZP::sudo
+zi snippet OMZP::cp
+zi snippet OMZP::systemd
+zi snippet OMZP::systemadmin
+zi snippet OMZP::tmux
 
-antigen theme ohmyzsh/ohmyzsh themes/3den
+# Other
+zi snippet OMZP::urltools
+zi snippet OMZP::common-aliases
+zi snippet OMZP::ag
+zi snippet OMZP::colored-man-pages
+zi snippet OMZP::history-substring-search
+
+# OOB (Out-of-band)
+zi light buonomo/yarn-completion
+zi load chrissicool/zsh-256color
+zi load zsh-users/zsh-completions
+zi light lukechilds/zsh-better-npm-completion
+zi light lukechilds/zsh-nvm
+zi light zsh-users/zsh-syntax-highlighting
+
+zi snippet OMZT::3den
 
 #Config
 #Keychain
 zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities  id_ed25519_gitit id_ed25519_servers id_ed25519_local
+zstyle :omz:plugins:keychain identities id_ed25519_gitit id_ed25519_servers id_ed25519_local id_ecdsa
 
 antigen apply
 
@@ -71,11 +67,36 @@ if [ -f $HOME/.config/zsh/zaliases.zsh ]; then
   source $HOME/.config/zsh/zaliases.zsh
 fi
 
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+
+# Zstyle
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' use-cache true
 zstyle ':completion:*' rehash true
 zstyle ':completion::complete:*' gain-privileges 1
 setopt COMPLETE_ALIASES
 zstyle ':completion:*' menu select
+
+# Setopt
+setopt pushd_ignore_dups
+setopt auto_pushd
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+
 
 
 [[ -d /opt/asdf-vm ]] && . /opt/asdf-vm/asdf.sh
