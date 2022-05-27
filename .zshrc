@@ -97,8 +97,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-if [[ "$HOSTNAME" != "g" ]]; then
-  bindkey '^[OH' beginning-of-line
-  bindkey '^[OF' end-of-line
-fi
+# if [[ "$HOSTNAME" != "g" ]]; then
+#   bindkey '^[OH' beginning-of-line
+#   bindkey '^[OF' end-of-line
+# fi
 export PATH="$PATH:$HOME/.spicetify"
