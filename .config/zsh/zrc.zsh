@@ -2,14 +2,17 @@ if [ -f $HOME/.config/zsh/zenv.zsh ]; then
   source $HOME/.config/zsh/zenv.zsh
 fi
 
+zi_home="${HOME}/.zi"
+source "${zi_home}/bin/zi.zsh"
+
 # Git
-zi snippet OMZP::git
 zi snippet OMZL::git.zsh
+zi snippet OMZP::git
 zi cdclear -q
 
 # Git [Addons]
 zi snippet OMZP::git-extras
-zi snippet OMZP::gh
+# zi snippet OMZP::gh
 zi snippet OMZP::git-lfs
 
 if [[ $OSVER == *"SUSE"* ]]; then
@@ -28,7 +31,6 @@ zi snippet OMZP::pip
 zi snippet OMZP::pipenv
 zi snippet OMZP::python
 zi snippet OMZP::pylint
-zi snippet OMZP::conda
 
 # Sysadmin
 zi snippet OMZP::sudo
@@ -40,18 +42,26 @@ zi snippet OMZP::tmux
 # Other
 zi snippet OMZP::urltools
 zi snippet OMZP::common-aliases
-zi snippet OMZP::ag
+
+zi ice as"completion"
+zi snippet OMZP::ag/_ag
+
 zi snippet OMZP::colored-man-pages
 zi snippet OMZP::history-substring-search
+zi snippet OMZP::history-substring-search/history-substring-search.zsh
 
 # OOB (Out-of-band)
-zi light buonomo/yarn-completion
+zi load buonomo/yarn-completion
 zi load chrissicool/zsh-256color
 zi load zsh-users/zsh-completions
-zi light lukechilds/zsh-better-npm-completion
-zi light lukechilds/zsh-nvm
-zi light zsh-users/zsh-syntax-highlighting
+zi load lukechilds/zsh-better-npm-completion
+zi load lukechilds/zsh-nvm
+zi load zsh-users/zsh-syntax-highlighting
 
+setopt promptsubst
+
+zi snippet OMZL::prompt_info_functions.zsh
+zi snippet OMZL::theme-and-appearance.zsh
 zi snippet OMZT::3den
 
 #Config
@@ -59,9 +69,6 @@ zi snippet OMZT::3den
 zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519_gitit id_ed25519_servers id_ed25519_local id_ecdsa
-
-antigen apply
-
 
 if [ -f $HOME/.config/zsh/zaliases.zsh ]; then
   source $HOME/.config/zsh/zaliases.zsh
@@ -97,27 +104,4 @@ setopt hist_save_no_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 
-
-
 [[ -d /opt/asdf-vm ]] && . /opt/asdf-vm/asdf.sh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/stig124/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/stig124/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/stig124/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/stig124/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-if [[ "$HOSTNAME" != "g" ]]; then
-  bindkey '^[OH' beginning-of-line
-  bindkey '^[OF' end-of-line
-fi
-export PATH="$PATH:$HOME/.spicetify"
