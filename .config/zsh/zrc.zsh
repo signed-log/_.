@@ -45,10 +45,10 @@ zi snippet OMZP::common-aliases
 
 zi ice as"completion"
 zi snippet OMZP::ag/_ag
+zi snippet OMZP::docker
 
 zi snippet OMZP::colored-man-pages
-zi snippet OMZP::history-substring-search
-zi snippet OMZP::history-substring-search/history-substring-search.zsh
+# zi snippet OMZ::plugins/history-substring-search
 
 # OOB (Out-of-band)
 zi load buonomo/yarn-completion
@@ -57,6 +57,8 @@ zi load zsh-users/zsh-completions
 zi load lukechilds/zsh-better-npm-completion
 zi load lukechilds/zsh-nvm
 zi load zsh-users/zsh-syntax-highlighting
+zi load z-shell/F-Sy-H
+zi load z-shell/H-S-MW
 
 setopt promptsubst
 
@@ -105,3 +107,6 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 
 [[ -d /opt/asdf-vm ]] && . /opt/asdf-vm/asdf.sh
+zi light-mode for \
+  z-shell/z-a-meta-plugins \
+  @annexes @zunit
