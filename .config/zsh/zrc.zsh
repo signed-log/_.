@@ -3,7 +3,21 @@ if [ -f $HOME/.config/zsh/zenv.zsh ]; then
 fi
 
 zi_home="${HOME}/.zi"
-source "${zi_home}/bin/zi.zsh"
+
+if [[ ! -d "$zi_home" ]]; then
+  typeset -Ag ZI
+  export ZI[BIN_DIR]="${XDG_CONFIG_HOME:-${HOME}/.config}/zi/bin"
+  source "${ZI[BIN_DIR]}/zi.zsh"
+  autoload -Uz _zi
+  (( ${+_comps} )) && _comps[zi]=_zi
+else
+  typeset -Ag ZI
+  export ZI[BIN_DIR]="$zi_home"
+  source "${ZI[BIN_DIR]}/bin/zi.zsh"
+  autoload -Uz _zi
+  (( ${+_comps} )) && _comps[zi]=_zi
+fi
+
 
 # Git
 zi snippet OMZL::git.zsh
@@ -59,6 +73,9 @@ zi load lukechilds/zsh-nvm
 zi load zsh-users/zsh-syntax-highlighting
 zi load z-shell/F-Sy-H
 zi load z-shell/H-S-MW
+zi ice lucid wait as'completion' blockf has'restic'
+zi snippet "$HOME/.local/share/completions/_restic"
+
 
 setopt promptsubst
 
