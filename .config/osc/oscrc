@@ -48,6 +48,8 @@ apiurl = https://api.opensuse.org
 # build-vmdisk-filesystem is the file system type of the disk-image used in a VM build
 # values are ext3(default) ext4 xfs reiserfs btrfs
 build-vmdisk-filesystem = btrfs
+ ccache = 1
+ sccache = 0
 # Numeric uid:gid to assign to the "abuild" user in the build-root
 # or "caller" to use the current users uid:gid
 # This is convenient when sharing the buildroot with ordinary userids
@@ -59,9 +61,8 @@ build-vmdisk-filesystem = btrfs
 # Enable ccache in build roots.
 # ccache = 1
 # Enable sccache in build roots. Conflicts with ccache.
-sccache = 1
 # Optional remote URI for sccache storage.
-sccache_uri = file:///var/cache/obs_sccache.tar
+# sccache_uri = file:///var/cache/obs_sccache.tar
 # extra packages to install when building packages locally (osc build)
 # this corresponds to osc build's -x option and can be overridden with that
 # -x '' can also be given on the command line to override this setting, or
@@ -130,5 +131,5 @@ check_filelist = 1
 # Plain text password
 #pass =
 user=stig124
-credentials_mgr_class=osc.credentials.KeyringCredentialsManager:keyrings.alt.Gnome.Keyring
-trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network
+credentials_mgr_class=osc.credentials.KeyringCredentialsManager:keyring.backends.kwallet.DBusKeyring
+trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide

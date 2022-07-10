@@ -1,3 +1,6 @@
 [submodule "/home/signed/.tmux/plugins/tpm"]
 	path = /home/signed/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".SpaceVim"]
+	path = .SpaceVim
+	url = https://github.com/SpaceVim/SpaceVim.git

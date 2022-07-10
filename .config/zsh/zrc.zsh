@@ -4,7 +4,7 @@ fi
 
 zi_home="${HOME}/.zi"
 
-if [[ ! -d "$zi_home" ]]; then
+if [[ ! -d "$zi_home"/bin ]]; then
   typeset -Ag ZI
   export ZI[BIN_DIR]="${XDG_CONFIG_HOME:-${HOME}/.config}/zi/bin"
   source "${ZI[BIN_DIR]}/zi.zsh"
@@ -127,3 +127,10 @@ setopt hist_reduce_blanks
 zi light-mode for \
   z-shell/z-a-meta-plugins \
   @annexes @zunit
+
+if [[ -d $HOME/.pyenv ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
