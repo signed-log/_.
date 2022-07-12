@@ -8,6 +8,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 
 export DISABLE_AUTO_TITLE='true'
+export MONITOR=all
 
 # Conditionals
 
