@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
-[[ -f /usr/bin/zsh ]] || sudo zypper install zsh
+set -eux
+
+echo "ZSH :"
+
+[[ -f /usr/bin/zsh ]] || sudo pacman -S --noconfirm zsh zsh-completions
 
 # Install and enable ZI
 declare -Ag ZI
 ZI[BIN_DIR]="${XDG_CONFIG_HOME:-${HOME}/.config}/zi/bin"
-command mkdir -p "${ZI[BIN_DIR]}"
-command chmod g-rwX "${ZI[BIN_DIR]}"
-command git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+command mkdir -pv "${ZI[BIN_DIR]}"
+command chmod -v g-rwX "${ZI[BIN_DIR]}"
+command git clone --verbose https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+
 
 if command -v restic; then
   command mkdir -pv "$HOME/.local/share/completions/"
   restic generate completion --zsh-completion "$HOME/.local/share/completions/_restic"
 fi
-

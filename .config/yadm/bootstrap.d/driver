@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -eux
+
+echo "Drivers"
+
+DIR=$(mktemp -d)
+VER="v0.31.0"
+URL="https://github.com/mozilla/geckodriver/releases/download/${VER}/geckodriver-${VER}-linux64.tar.gz"
+FNAME=$(awk -F / '{print $NF}' <(echo "$URL"))
+
+cd "$DIR" || exit
+
+echo "Geckodriver"
+
+if command -v cargo; then
+  cargo install geckodriver
+else
+  curl -LOv "$URL"
+  tar -xzvf "$FNAME"
+  command mkdir -pv $HOME/.local/bin
+  mv geckodriver $HOME/.local/bin/
+fi

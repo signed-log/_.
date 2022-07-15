@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -eux
+
+DIR=$(mktemp -d)
+# Updated on 2022-07-15
+URL="https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.25.12424.tar.gz"
+FNAME=$(awk -F / '{print $NF}' <(echo "$URL"))
+
+cd "$DIR" || exit
+curl -LOv "$URL"
+tar -xzvf "$FNAME"
+
+mkdir -pv $HOME/.local/bin/
+cp "${FNAME%%.tar.gz}"/jetbrains-toolbox $HOME/.local/bin
+
+[ -t 0 ] || jetbrains-toolbox &

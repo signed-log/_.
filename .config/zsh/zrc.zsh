@@ -114,6 +114,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion::complete:*' gain-privileges 1
 setopt COMPLETE_ALIASES
 zstyle ':completion:*' menu select
+zstyle :plugin:history-search-multi-word reset-prompt-protect 1
 
 # Setopt
 setopt pushd_ignore_dups

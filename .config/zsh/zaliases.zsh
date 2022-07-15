@@ -18,4 +18,9 @@ pdfcombine() {
 pipenv-base() {
   pipenv -v install --dev --pre black ipython pyright pylint coverage isort autoflake
 }
+
+startmlv() {
+  sudo systemctl daemon-reload ; sudo systemctl start mullvad-daemon
+}
+
 alias ttd='tt -csv >> ~/.local/share/wpm.csv'
