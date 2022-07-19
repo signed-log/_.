@@ -14,4 +14,4 @@ tar -xzvf "$FNAME"
 mkdir -pv $HOME/.local/bin/
 cp "${FNAME%%.tar.gz}"/jetbrains-toolbox $HOME/.local/bin
 
-[ -t 0 ] || jetbrains-toolbox &
+[ -t 0 ] || $HOME/.local/bin/jetbrains-toolbox &
