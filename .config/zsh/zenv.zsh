@@ -1,5 +1,5 @@
 # PATH
-export SPICETIFY_INSTALL="$HOME/spicetify-cli"
+export SPICETIFY_INSTALL="$HOME/.spicetify"
 export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
@@ -9,6 +9,10 @@ export EDITOR=nvim
 
 export DISABLE_AUTO_TITLE='true'
 export MONITOR=all
+
+if [[ -f "$HOME/.local/bin/batman" ]] && command -v bat > /dev/null; then
+  export MANPAGER="$HOME/.local/bin/batman"
+fi
 
 # Conditionals
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[[ -f /usr/bin/zsh ]] || sudo zypper install zsh
+[[ -f /usr/bin/zsh ]] || sudo zypper install -y zsh zsh-completion
 
 # Install and enable ZI
 declare -Ag ZI
@@ -14,3 +14,7 @@ if command -v restic; then
   restic generate completion --zsh-completion "$HOME/.local/share/completions/_restic"
 fi
 
+if command -v gh; then
+  command mkdir -pv "$HOME/.local/share/completions/"
+  gh completion --shell zsh > "$HOME/.local/share/completions/_gh"
+fi

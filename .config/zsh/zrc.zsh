@@ -62,7 +62,6 @@ zi snippet OMZP::ag/_ag
 zi snippet OMZP::docker
 
 zi snippet OMZP::colored-man-pages
-# zi snippet OMZ::plugins/history-substring-search
 
 # OOB (Out-of-band)
 zi load buonomo/yarn-completion
@@ -73,15 +72,25 @@ zi load lukechilds/zsh-nvm
 zi load zsh-users/zsh-syntax-highlighting
 zi load z-shell/F-Sy-H
 zi load z-shell/H-S-MW
-zi ice lucid wait as'completion' blockf has'restic'
-zi snippet "$HOME/.local/share/completions/_restic"
 
+# Completions
+if command -v restic > /dev/null; then 
+  zi ice lucid wait as'completion' blockf has'restic'
+  zi snippet "$HOME/.local/share/completions/_restic"
+fi
+
+if command -v gh > /dev/null; then
+  zi ice lucid wait as'completion' blockf has'gh'
+  zi snippet "$HOME/.local/share/completions/_gh"
+fi
 
 setopt promptsubst
 
 zi snippet OMZL::prompt_info_functions.zsh
 zi snippet OMZL::theme-and-appearance.zsh
-zi snippet OMZT::3den
+# zi snippet OMZT::3den
+# Patched theme to display 24h time
+zi snippet "https://github.com/signed-log/ohmyzsh/blob/24h-time/themes/mikeh.zsh-theme"
 
 #Config
 #Keychain

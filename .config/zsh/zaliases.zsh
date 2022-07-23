@@ -1,9 +1,8 @@
-if [ -f "/usr/bin/bat" ]; then
-  alias rcat=cat
+if command -v bat >/dev/null; then
   alias cat=bat
 fi
 
-if [ -f "/usr/bin/exa" ]; then
+if command -v exa >/dev/null; then
   alias ls="exa --group-directories-first --all"
 fi
 
