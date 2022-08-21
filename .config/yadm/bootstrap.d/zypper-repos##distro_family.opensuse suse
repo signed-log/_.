@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+set -eux
+
+NEOVIM_OSS=$(zypper --disable-system-resolvables if -r repo-oss neovim | grep -i version | awk -F: '{print $NF}' | awk -F- '{print $1}' | cut -c 3- )
+NEOVIM_OSS=$(( ${NEOVIM_OSS//.} ))
+NEOVIM_OBS=80
+
+echo "$NEOVIM_OSS"
+echo "$NEOVIM_OBS"
+
+
