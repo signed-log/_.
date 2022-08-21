@@ -30,7 +30,7 @@
     editor = nvim
     autocrlf = false
     excludesfile = /home/signed-log/.global_gitignore
-    sshCommand = ssh -i ~/.ssh/id_ed25519_gitit
+    sshCommand = ssh -i ~/.ssh/id_greytop
 
 [push]
     default = simple

@@ -1,3 +1,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule ".local/bin/misc"]
+	path = .local/bin/misc
+	url = https://github.com/signed-log/misc.git
