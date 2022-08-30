@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+set -eu
+set -o errexit
+
+sudo cp ~/.config/udev/69-n-link.rules /etc/udev/rules.d
+sudo udevadm control --reload-rules && sudo udevadm trigger
