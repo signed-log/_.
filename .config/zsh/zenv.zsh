@@ -1,6 +1,6 @@
 # PATH
 export SPICETIFY_INSTALL="$HOME/.spicetify"
-export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/.local/bin/misc/:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
 
@@ -10,15 +10,15 @@ export EDITOR=nvim
 export DISABLE_AUTO_TITLE='true'
 export MONITOR=all
 
-if [[ -f "$HOME/.local/bin/batman" ]] && command -v bat > /dev/null; then
-  export MANPAGER="$HOME/.local/bin/batman"
+if command -v batman >/dev/null 2>&1 && command -v bat >/dev/null 2>&1; then
+  export MANPAGER="batman"
 fi
 
 # Conditionals
 
 OSVER=$( (lsb_release -ds || cat /etc/*release || uname -om) 2>/dev/null | head -n1)
 
-if [ -f "/usr/bin/most" ]; then
+if command -v most >/dev/null 2>&1; then
   export PAGER=most
   export DELTA_PAGER=most
 fi

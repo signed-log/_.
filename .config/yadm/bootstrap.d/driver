@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+# vim: ft=bash
 
-set -eux
+set -eu
 
 echo "Drivers"
 
@@ -18,6 +19,6 @@ if command -v cargo; then
 else
   curl -LOv "$URL"
   tar -xzvf "$FNAME"
-  command mkdir -pv $HOME/.local/bin
-  mv geckodriver $HOME/.local/bin/
+  command mkdir -pv "$HOME/.local/bin"
+  mv geckodriver "$HOME/.local/bin/"
 fi

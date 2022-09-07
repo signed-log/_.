@@ -1,3 +1,4 @@
-.ssh/
+.ssh/**/*
+!.ssh/config.d/defaults
 .wakatime.cfg
 .config/polychromatic/backends/openrazer/images/
