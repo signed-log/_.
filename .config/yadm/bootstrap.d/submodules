@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/bash
+
+set -eu
 
 # Because Git submodule commands cannot operate without a work tree, they must
 # be run from within $HOME (assuming this is the root of your dotfiles)

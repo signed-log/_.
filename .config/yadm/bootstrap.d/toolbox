@@ -11,7 +11,7 @@ cd "$DIR" || exit
 curl -LO "$URL"
 tar -xzf "$FNAME"
 
-mkdir -pv $HOME/.local/bin/
-cp "${FNAME%%.tar.gz}"/jetbrains-toolbox $HOME/.local/bin
+mkdir -pv "$HOME"/.local/bin/
+cp "${FNAME%%.tar.gz}"/jetbrains-toolbox "$HOME"/.local/bin
 
-[ -t 0 ] || $HOME/.local/bin/jetbrains-toolbox &
+[ -t 0 ] || nohup "$HOME"/.local/bin/jetbrains-toolbox &
