@@ -1,4 +1,4 @@
-# vim: ts=2: sw=2
+# vim: ts=2: sw=2: ft=gitconfig
 
 [user]
   email = stigpro@outlook.fr
@@ -21,10 +21,10 @@
   mergeoptions = --no-edit
   autocrlf = input
   pager = less -FiR # -F is necessary but has problems with tmux and regular shells
-  #pager = most
-  excludesfile = ~/.config/git/.global_gitignore
-  #pager = vimpager
-  #pager = more -p
+  excludesfile = ~/.config/git/global_gitignore
+  quotepath = false
+  editor = nvim
+  untrackedCache = true
 
 [url "https://"]
 	insteadOf = git://
@@ -32,8 +32,32 @@
 [commit]
 	gpgSign = true
 
+[diff]
+  # detect renamed files and show only actual differences between them
+  renames = copies
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[mergetool "merge3"]
+  layout = LOCAL,MERGED,REMOTE
+
 [format]
   signOff = true
+
+[merge]
+  tool = merge3
+  conflictstyle = diff3
+
+[mergetool]
+  keepBackup = false
+  trustExitCode = false
+  prompt = true
+
+[rebase]
+  # automatically process "fixup!" commits when rebasing interactively
+  autosquash = true
 
 [init]
 	defaultBranch = main
@@ -41,5 +65,6 @@
 [include]
   path = ~/.config/git/aliases.gitconfig
 
-[include]
-  path = gitconfig.local2
+
+[merge "ours"]
+	driver = true
