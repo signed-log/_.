@@ -127,3 +127,5 @@
 	decorate = short
 [format]
 	signOff = true
+[merge "ours"]
+	driver = true
