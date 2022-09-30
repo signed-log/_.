@@ -6,8 +6,8 @@
   <property name="pressureMultiplier" value="1.00000000"/>
   <property name="zoomGesturesEnabled" value="true"/>
   <property name="selectedToolbar" value="Right hand Note Taking"/>
-  <property name="lastSavePath" value="/home/signed/school/PHY"/>
-  <property name="lastOpenPath" value="/home/signed/school/PHY"/>
+  <property name="lastSavePath" value="/home/signed/Documents"/>
+  <property name="lastOpenPath" value="/home/signed/school/Math"/>
   <property name="lastImagePath" value=""/>
   <property name="edgePanSpeed" value="20.00000000"/>
   <property name="edgePanMaxMult" value="5.00000000"/>
@@ -19,7 +19,7 @@
   <property name="maximized" value="true"/>
   <property name="showToolbar" value="true"/>
   <property name="showSidebar" value="false"/>
-  <property name="sidebarWidth" value="117"/>
+  <property name="sidebarWidth" value="50"/>
   <property name="sidebarOnRight" value="false"/>
   <property name="scrollbarOnLeft" value="false"/>
   <property name="menubarVisible" value="true"/>
@@ -97,7 +97,7 @@
   <property name="restoreLineWidthEnabled" value="false"/>
   <property name="numIgnoredStylusEvents" value="0"/>
   <property name="inputSystemTPCButton" value="false"/>
-  <property name="inputSystemDrawOutsideWindow" value="true"/>
+  <property name="inputSystemDrawOutsideWindow" value="false"/>
   <property name="preferredLocale" value=""/>
   <property name="stabilizerAveragingMethod" value="0"/>
   <property name="stabilizerPreprocessor" value="0"/>
@@ -167,9 +167,13 @@
       <attribute name="deviceClass" type="int" value="4"/>
       <attribute name="deviceSource" type="int" value="5"/>
     </data>
+    <data name="Wayland Wheel Scrolling">
+      <attribute name="deviceClass" type="int" value="1"/>
+      <attribute name="deviceSource" type="int" value="0"/>
+    </data>
   </data>
   <data name="tools">
-    <attribute name="current" type="string" value="text"/>
+    <attribute name="current" type="string" value="pen"/>
     <data name="drawArrow">
       <attribute name="drawingType" type="string" value="default"/>
     </data>
@@ -208,7 +212,7 @@
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="128"/>
-      <attribute name="size" type="string" value="BIG"/>
+      <attribute name="size" type="string" value="THIN"/>
       <attribute name="style" type="string" value="plain"/>
     </data>
     <data name="playObject">
