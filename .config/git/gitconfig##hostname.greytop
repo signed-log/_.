@@ -61,10 +61,21 @@
 
 [init]
 	defaultBranch = main
-
 [include]
   path = ~/.config/git/aliases.gitconfig
-
-
 [merge "ours"]
 	driver = true
+[fetch "fsck"]
+	badTimezone = ignore
+[apply]
+	ignoreWhitespace = change
+[rerere]
+	enabled = true
+	autoUpdate = true
+[am]
+	threeWay = true
+[log]
+	abbrevCommit = true
+	decorate = short
+[format]
+	signOff = true
