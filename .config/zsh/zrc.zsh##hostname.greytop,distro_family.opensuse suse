@@ -36,7 +36,6 @@ fi
 # GPG/SSH/Security
 zi snippet OMZP::gpg-agent
 zi snippet OMZP::ssh-agent
-zi snippet OMZP::keychain
 zi snippet OMZP::safe-paste
 zi snippet OMZP::firewalld
 
@@ -92,12 +91,6 @@ zi snippet OMZL::theme-and-appearance.zsh
 # zi snippet OMZT::3den
 # Patched theme to display 24h time
 # zi snippet "https://github.com/signed-log/ohmyzsh/blob/24h-time/themes/mikeh.zsh-theme"
-
-#Config
-#Keychain
-zstyle :omz:plugins:keychain options --quiet
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_ed25519_gitit id_ed25519_servers id_ed25519_local id_ecdsa id_greytop
 
 if [ -f $HOME/.config/zsh/zaliases.zsh ]; then
   source $HOME/.config/zsh/zaliases.zsh
