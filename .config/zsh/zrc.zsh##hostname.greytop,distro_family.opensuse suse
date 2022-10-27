@@ -34,8 +34,8 @@ if [[ $OSVER == *"SUSE"* ]]; then
 fi
 
 # GPG/SSH/Security
-zi snippet OMZP::gpg-agent
-zi snippet OMZP::ssh-agent
+# zi snippet OMZP::gpg-agent
+# zi snippet OMZP::ssh-agent
 zi snippet OMZP::safe-paste
 zi snippet OMZP::firewalld
 
