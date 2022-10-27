@@ -34,9 +34,8 @@ if [[ $OSVER == *"SUSE"* ]]; then
 fi
 
 # GPG/SSH/Security
-zi snippet OMZP::gpg-agent
-zi snippet OMZP::ssh-agent
-zi snippet OMZP::keychain
+# zi snippet OMZP::gpg-agent
+# zi snippet OMZP::ssh-agent
 zi snippet OMZP::safe-paste
 zi snippet OMZP::firewalld
 
@@ -72,6 +71,7 @@ zi load lukechilds/zsh-nvm
 zi load zsh-users/zsh-syntax-highlighting
 zi load z-shell/F-Sy-H
 zi load z-shell/H-S-MW
+zi load spaceship-prompt/spaceship-prompt
 
 # Completions
 if command -v restic > /dev/null; then 
@@ -90,13 +90,7 @@ zi snippet OMZL::prompt_info_functions.zsh
 zi snippet OMZL::theme-and-appearance.zsh
 # zi snippet OMZT::3den
 # Patched theme to display 24h time
-zi snippet "https://github.com/signed-log/ohmyzsh/blob/24h-time/themes/mikeh.zsh-theme"
-
-#Config
-#Keychain
-zstyle :omz:plugins:keychain options --quiet
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_ed25519_gitit id_ed25519_servers id_ed25519_local id_ecdsa
+# zi snippet "https://github.com/signed-log/ohmyzsh/blob/24h-time/themes/mikeh.zsh-theme"
 
 if [ -f $HOME/.config/zsh/zaliases.zsh ]; then
   source $HOME/.config/zsh/zaliases.zsh
