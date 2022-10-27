@@ -26,4 +26,13 @@ startmlv() {
   sudo systemctl daemon-reload ; sudo systemctl start mullvad-daemon
 }
 
+tohex() {
+  printf "%X\n" $@
+}
+
+todec() {
+  printf "%d\n" $@
+}
+
+
 alias ttd='tt -csv >> ~/.local/share/wpm.csv'
