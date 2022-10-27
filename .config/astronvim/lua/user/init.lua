@@ -196,6 +196,7 @@ local config = {
 			--   end,
 			-- },
 			{ "wakatime/vim-wakatime" },
+			{ "editorconfig/editorconfig-vim" },
 			-- { "pearofducks/ansible-vim" },
 
 			-- We also support a key value style plugin definition similar to NvChad:

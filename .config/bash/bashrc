@@ -1,0 +1,4 @@
+if [[ -n $ASCIINEMA_REC ]]; then
+  export PS1="> "
+  unset $LS_COLORS
+fi
