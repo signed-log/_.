@@ -20,6 +20,7 @@ src/
 ### C ###
 # Prerequisites
 *.d
+!.*.d
 
 # Object files
 *.o
@@ -477,7 +478,6 @@ TSWLatexianTemp*
 
 # auto folder when using emacs and auctex
 ./auto/*
-*.el
 
 # expex forward references with \gathertags
 *-tags.tex

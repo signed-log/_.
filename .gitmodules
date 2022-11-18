@@ -4,3 +4,6 @@
 [submodule ".local/bin/misc"]
 	path = .local/bin/misc
 	url = https://github.com/signed-log/misc.git
+[submodule "/home/signed/.emacs.d"]
+	path = /home/signed/.emacs.d
+	url = https://github.com/doomemacs/doomemacs

@@ -1,6 +1,6 @@
 # PATH
 export SPICETIFY_INSTALL="$HOME/.spicetify"
-export PATH=$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/.local/bin/misc/:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.emacs.d/bin:$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/.local/bin/misc/:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
 
@@ -41,9 +41,13 @@ export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('lvim' 'nvim' 'emacs')
 
+# Really specific config
+
 if [[ -f "$HOME/.config/zsh/special-${HOSTNAME}.zsh" ]]; then
   source "$HOME/.config/zsh/special-${HOSTNAME}.zsh"
 fi
+
+# GPG SSH AGENT
 
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
