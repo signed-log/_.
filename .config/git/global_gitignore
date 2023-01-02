@@ -1,6 +1,4 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/linux,zsh,visualstudio,visualstudiocode,virtualenv,jetbrains+all,libreoffice,archlinuxpackages,c,c++,fusetools,flatpak,latex,git,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=linux,zsh,visualstudio,visualstudiocode,virtualenv,jetbrains+all,libreoffice,archlinuxpackages,c,c++,fusetools,flatpak,latex,git,python
+# vim: ft=ignore
 
 ### ArchLinuxPackages ###
 *.tar
@@ -1094,7 +1092,6 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/linux,zsh,visualstudio,visualstudiocode,virtualenv,jetbrains+all,libreoffice,archlinuxpackages,c,c++,fusetools,flatpak,latex,git,python
 n
 settings.json
 .pdm.toml

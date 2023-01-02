@@ -196,7 +196,7 @@ local config = {
 			--   end,
 			-- },
 			{ "wakatime/vim-wakatime" },
-			{ "editorconfig/editorconfig-vim" },
+			-- { "editorconfig/editorconfig-vim" },
 			-- { "pearofducks/ansible-vim" },
 
 			-- We also support a key value style plugin definition similar to NvChad:
@@ -272,8 +272,6 @@ local config = {
 			path = 250,
 		},
 	},
-	
-	
 	-- Modify which-key registration (Use this with mappings table in the above.)
 	["which-key"] = {
 		-- Add bindings which show up as group name
