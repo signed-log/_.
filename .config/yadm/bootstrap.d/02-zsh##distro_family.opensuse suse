@@ -13,11 +13,11 @@ chmod g-rwX "${ZI[BIN_DIR]}"
 git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
 
 if command -v restic; then
-  command mkdir -pv "$HOME/.local/share/completions/"
+  command mkdir -p "$HOME/.local/share/completions/"
   restic generate completion --zsh-completion "$HOME/.local/share/completions/_restic"
 fi
 
 if command -v gh; then
-  command mkdir -pv "$HOME/.local/share/completions/"
+  command mkdir -p "$HOME/.local/share/completions/"
   gh completion --shell zsh > "$HOME/.local/share/completions/_gh"
 fi
