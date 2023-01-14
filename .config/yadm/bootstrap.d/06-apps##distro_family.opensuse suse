@@ -71,7 +71,11 @@ function snapd {
   sudo snap install telegram-desktop --edge
 }
 
+function pwsh {
+  dotnet tool install --global PowerShell
+}
+
 command -v zypper >/dev/null 2>&1 && zyp
 command -v flatpak >/dev/null 2>&1 && fpk
 command -v snap >/dev/null 2>&1 && snapd
-
+command -v dotnet >/dev/null 2>&1 && pwsh
