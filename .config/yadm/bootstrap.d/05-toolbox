@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-set -eux
+set -euo pipefail
 
 DIR=$(mktemp -d)
-# Updated on 2022-07-15
-URL="https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.25.12627.tar.gz"
+# Updated on 2023-01-13
+URL="https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.27.2.13801.tar.gz"
 FNAME=$(awk -F / '{print $NF}' <(echo "$URL"))
 
 cd "$DIR" || exit
 curl -LO "$URL"
 tar -xzf "$FNAME"
 
-mkdir -pv "$HOME"/.local/bin/
+mkdir -p "$HOME"/.local/bin/
 cp "${FNAME%%.tar.gz}"/jetbrains-toolbox "$HOME"/.local/bin
 
 [ -t 0 ] || nohup "$HOME"/.local/bin/jetbrains-toolbox &

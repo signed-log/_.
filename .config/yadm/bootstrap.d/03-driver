@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # vim: ft=bash
 
-set -eu
+set -euo pipefail
 
 echo "Drivers"
 
