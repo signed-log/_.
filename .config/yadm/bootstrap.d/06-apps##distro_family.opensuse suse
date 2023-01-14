@@ -16,7 +16,7 @@ function remove-and-lock {
     "python-base"
     "gnome-software"
   )
-  $ZYP_COMMAND --ignore-unknown rm "${to_lock[@]}"
+  $ZYP_COMMAND --ignore-unknown rm -y "${to_lock[@]}"
   $ZYP_COMMAND --ignore-unknown al "${to_lock[@]}"
 }
 
