@@ -35,7 +35,7 @@ echo "Dotnet"
 
 sudo zypper -n --no-cd addrepo -cf https://packages.microsoft.com/opensuse/15/prod/ dotnet &&
     sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r dotnet && \
-    sudo zypper -n --no-cd install -y --auto-agree-with-licenses -r dotnet \*7.0
+    sudo zypper -n --no-cd install -y --auto-agree-with-licenses dotnet\*7.0 aspnet\*7.0
 
 echo "Snap"
 
