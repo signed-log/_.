@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# vim: ft=bash
 
 set -euo pipefail
 

@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# vim: ft=bash
 
 set -euo pipefail
 
@@ -15,61 +16,57 @@ $ZYP_COMMAND refresh
 command -v yq >/dev/null 2>&1 || $ZYP_COMMAND install -y jq yq
 
 function librewolf {
-    echo "Librewolf"
-    # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/openSUSE_Tumbleweed/home:zzndb001.repo' && \
-    $ZYP_COMMAND --gpg-auto-import-keys refresh -r Librewolf && \
-    $ZYP_COMMAND dist-upgrade --from Librewolf -y --allow-vendor-change  && \
+  echo "Librewolf"
+  $ZYP_COMMAND addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/openSUSE_Tumbleweed/home:zzndb001.repo' &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r Librewolf &&
+    $ZYP_COMMAND dist-upgrade --from Librewolf -y --allow-vendor-change &&
     $ZYP_COMMAND install -y --allow-vendor-change -r Librewolf LibreWolf
 
 }
 
 function codecs {
-    echo "Codecs"
-    # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman && \
-    $ZYP_COMMAND --gpg-auto-import-keys refresh -r packman && \
-    $ZYP_COMMAND dist-upgrade --from packman -y --allow-vendor-change --auto-agree-with-licenses && \
+  echo "Codecs"
+  $ZYP_COMMAND addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r packman &&
+    $ZYP_COMMAND dist-upgrade --from packman -y --allow-vendor-change --auto-agree-with-licenses &&
     $ZYP_COMMAND install --from packman -y --auto-agree-with-licenses ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
 }
 
 function ms-key {
-    echo "Microsoft"
-    curl -LOs $MS_KEY_URL
-    sudo rpm --import "$(awk -F / '{print $NF}' <(echo "$MS_KEY_URL"))"
+  echo "Microsoft"
+  curl -LOs $MS_KEY_URL
+  sudo rpm --import "$(awk -F / '{print $NF}' <(echo "$MS_KEY_URL"))"
 }
 
 function edge {
-    echo "Edge"
-    $ZYP_COMMAND addrepo -cf 'https://packages.microsoft.com/yumrepos/edge/' ms-edge && \
-    $ZYP_COMMAND --gpg-auto-import-keys refresh -r ms-edge && \
+  echo "Edge"
+  $ZYP_COMMAND addrepo -cf 'https://packages.microsoft.com/yumrepos/edge/' ms-edge &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r ms-edge &&
     $ZYP_COMMAND install -y --auto-agree-with-licenses -r ms-edge microsoft-edge-stable
 }
 
 function dotnet {
-    echo "Dotnet"
-    $ZYP_COMMAND addrepo -cf https://packages.microsoft.com/opensuse/15/prod/ dotnet &&
-    $ZYP_COMMAND --gpg-auto-import-keys refresh -r dotnet && \
+  echo "Dotnet"
+  $ZYP_COMMAND addrepo -cf https://packages.microsoft.com/opensuse/15/prod/ dotnet &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r dotnet &&
     $ZYP_COMMAND install -y --auto-agree-with-licenses dotnet\*7.0 aspnet\*7.0
 }
 
 function snapd {
-    echo "Snap"
-    # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed' snappy && \
-    $ZYP_COMMAND --gpg-auto-import-keys refresh -r snappy && \
-    $ZYP_COMMAND dist-upgrade --from snappy -y && \
-    $ZYP_COMMAND install -r snappy -y snapd && \
-    sudo systemctl enable --now snapd
+  echo "Snap"
+  $ZYP_COMMAND addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed' snappy &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r snappy &&
+    $ZYP_COMMAND dist-upgrade --from snappy -y &&
+    $ZYP_COMMAND install -r snappy -y snapd &&
+    sudo systemctl enable --now snapd &&
     sudo systemctl enable --now snapd.apparmor
 }
 
 REPO_LIST=$($ZYP_COMMAND --xmlout lr | $YQ_COMMAND '.stream.repo-list.repo')
 
-grep -i "librewolf" <<< "$REPO_LIST" >/dev/null 2>&1 || librewolf
-grep -i "packman" <<< "$REPO_LIST" >/dev/null 2>&1 || packman
+grep -i "librewolf" <<<"$REPO_LIST" >/dev/null 2>&1 || librewolf
+grep -i "packman" <<<"$REPO_LIST" >/dev/null 2>&1 || packman
 ms-key
-grep -i "edge" <<< "$REPO_LIST" >/dev/null 2>&1 || ms-edge
-grep -i "dotnet" <<< "$REPO_LIST" >/dev/null 2>&1 || dotnet
-grep -i "snappy" <<< "$REPO_LIST" >/dev/null 2>&1 || snapd
-
+grep -i "edge" <<<"$REPO_LIST" >/dev/null 2>&1 || ms-edge
+grep -i "dotnet" <<<"$REPO_LIST" >/dev/null 2>&1 || dotnet
+grep -i "snappy" <<<"$REPO_LIST" >/dev/null 2>&1 || snapd

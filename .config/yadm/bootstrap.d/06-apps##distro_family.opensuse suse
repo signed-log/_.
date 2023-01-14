@@ -1,0 +1,77 @@
+#!/usr/bin/bash
+# vim: ft=bash
+
+set -euo pipefail
+
+ZYP_COMMAND="sudo zypper -n --no-cd"
+
+function remove-and-lock {
+  to_lock=(
+    "PackageKit"
+    "discover"
+    "emacs-x11"
+    "neovim-gtk"
+    "opensuse-welcome"
+    "power-profiles-daemon"
+    "python-base"
+    "gnome-software"
+  )
+  $ZYP_COMMAND --ignore-unknown rm "${to_lock[@]}"
+  $ZYP_COMMAND --ignore-unknown al "${to_lock[@]}"
+}
+
+function zyp {
+  ZYP_APPS=(
+    "android-tools*"
+    "bat"
+    "bluez"
+    "bluez-cups"
+    "bluez-auto-enable-devices"
+    "neovim"
+    "wezterm"
+    "restic"
+    "emacs-nox"
+    "the_silver_searcher"
+    "steam"
+    "steamcmd"
+    "steamtricks"
+    "wine-staging"
+    "wine-staging-devel"
+    "winetricks"
+    "wine-gecko"
+    "wine-mono"
+    "java-19-openjdk"
+    "java-19-openjdk-devel"
+    "java-19-openjdk-headless"
+    "bsdtar"
+    "tmux"
+    "lshw"
+    "lsof"
+    "nnn"
+    "obs-service*"
+    "flatpak"
+  )
+  $ZYP_COMMAND install -y --auto-agree-with-licenses "${ZYP_APPS[@]}"
+  remove-and-lock
+}
+
+function fpk {
+  sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  FPK_APPS=(
+    "com.mattjakeman.ExtensionManager"
+    "org.gnome.Extensions"
+    "org.gnome.dspy"
+    "ca.desrt.dconf-editor"
+  )
+  sudo flatpak install flathub -y "${FPK_APPS[@]}"
+}
+
+function snapd {
+  sudo snap install discord
+  sudo snap install telegram-desktop --edge
+}
+
+command -v zypper >/dev/null 2>&1 && zyp
+command -v flatpak >/dev/null 2>&1 && fpk
+command -v snap >/dev/null 2>&1 && snapd
+

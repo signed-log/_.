@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+# vim: ft=bash
 
-set -eux
+set -euo pipefail
 
 echo "ZSH :"
 

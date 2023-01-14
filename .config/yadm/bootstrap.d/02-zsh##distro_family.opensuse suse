@@ -1,15 +1,16 @@
 #!/usr/bin/bash
+# vim: ft=bash
 
 set -euo pipefail
 
-[[ -f /usr/bin/zsh ]] || sudo zypper install -y zsh zsh-completion
+[[ -f /usr/bin/zsh ]] || sudo zypper install -y zsh \*zsh-completion
 
 # Install and enable ZI
 declare -Ag ZI
 ZI[BIN_DIR]="${XDG_CONFIG_HOME:-${HOME}/.config}/zi/bin"
-command mkdir -p "${ZI[BIN_DIR]}"
-command chmod g-rwX "${ZI[BIN_DIR]}"
-command git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+mkdir -p "${ZI[BIN_DIR]}"
+chmod g-rwX "${ZI[BIN_DIR]}"
+git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
 
 if command -v restic; then
   command mkdir -pv "$HOME/.local/share/completions/"

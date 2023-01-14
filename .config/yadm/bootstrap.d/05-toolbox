@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+# vim: ft=bash
 
 set -euo pipefail
 
-DIR=$(mktemp -d)
+TMPDIR="$(mktemp -d)"
 # Updated on 2023-01-13
 URL="https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.27.2.13801.tar.gz"
 FNAME=$(awk -F / '{print $NF}' <(echo "$URL"))
 
-cd "$DIR" || exit
-curl -LO "$URL"
-tar -xzf "$FNAME"
+pushd "$TMPDIR" >/dev/null || exit
+curl -LO "$URL" && tar -xf "$FNAME"
 
 mkdir -p "$HOME"/.local/bin/
 cp "${FNAME%%.tar.gz}"/jetbrains-toolbox "$HOME"/.local/bin
