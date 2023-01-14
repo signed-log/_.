@@ -17,7 +17,7 @@ command -v yq >/dev/null 2>&1 || $ZYP_COMMAND install -y jq yq
 function librewolf {
     echo "Librewolf"
     # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/$releasever/home:zzndb001.repo' && \
+    $ZYP_COMMAND addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/openSUSE_Tumbleweed/home:zzndb001.repo' && \
     $ZYP_COMMAND --gpg-auto-import-keys refresh -r Librewolf && \
     $ZYP_COMMAND dist-upgrade --from Librewolf -y --allow-vendor-change  && \
     $ZYP_COMMAND install -y --allow-vendor-change -r Librewolf LibreWolf
@@ -27,7 +27,7 @@ function librewolf {
 function codecs {
     echo "Codecs"
     # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/$releasever/' packman && \
+    $ZYP_COMMAND addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman && \
     $ZYP_COMMAND --gpg-auto-import-keys refresh -r packman && \
     $ZYP_COMMAND dist-upgrade --from packman -y --allow-vendor-change --auto-agree-with-licenses && \
     $ZYP_COMMAND install --from packman -y --auto-agree-with-licenses ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
@@ -56,7 +56,7 @@ function dotnet {
 function snapd {
     echo "Snap"
     # shellcheck disable=SC2016
-    $ZYP_COMMAND addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/$releasever' snappy && \
+    $ZYP_COMMAND addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed' snappy && \
     $ZYP_COMMAND --gpg-auto-import-keys refresh -r snappy && \
     $ZYP_COMMAND dist-upgrade --from snappy -y && \
     $ZYP_COMMAND install -r snappy -y snapd && \
@@ -66,10 +66,10 @@ function snapd {
 
 REPO_LIST=$($ZYP_COMMAND --xmlout lr | $YQ_COMMAND '.stream.repo-list.repo')
 
-grep -i "librewolf" >/dev/null 2>&1 || librewolf
-grep -i "packman" >/dev/null 2>&1 || packman
+grep -i "librewolf" <<< "$REPO_LIST" >/dev/null 2>&1 || librewolf
+grep -i "packman" <<< "$REPO_LIST" >/dev/null 2>&1 || packman
 ms-key
-grep -i "edge" >/dev/null 2>&1 || ms-edge
-grep -i "dotnet" >/dev/null 2>&1 || dotnet
-grep -i "snappy" >/dev/null 2>&1 || snapd
+grep -i "edge" <<< "$REPO_LIST" >/dev/null 2>&1 || ms-edge
+grep -i "dotnet" <<< "$REPO_LIST" >/dev/null 2>&1 || dotnet
+grep -i "snappy" <<< "$REPO_LIST" >/dev/null 2>&1 || snapd
 
