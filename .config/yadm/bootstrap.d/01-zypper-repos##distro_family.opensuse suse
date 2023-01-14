@@ -6,42 +6,70 @@ TMPDIR="$(mktemp -d)"
 
 pushd "$TMPDIR"
 
-sudo zypper -n --no-cd refresh -f
+ZYP_COMMAND="sudo zypper -n --no-cd"
+YQ_COMMAND="yq -p=xml"
 
-echo "Librewolf"
+MS_KEY_URL="https://packages.microsoft.com/keys/microsoft.asc"
 
-sudo zypper -n --no-cd addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/openSUSE_Tumbleweed/home:zzndb001.repo' && \
-    sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r Librewolf && \
-    sudo zypper -n --no-cd dist-upgrade --from Librewolf -y --allow-vendor-change  && \
-    sudo zypper -n --no-cd install -y --allow-vendor-change -r Librewolf LibreWolf
+$ZYP_COMMAND refresh
+command -v yq >/dev/null 2>&1 || $ZYP_COMMAND install -y jq yq
 
-echo "Codecs"
+function librewolf {
+    echo "Librewolf"
+    # shellcheck disable=SC2016
+    $ZYP_COMMAND addrepo -cfp 98 -n Librewolf 'https://download.opensuse.org/repositories/home:/zzndb001/$releasever/home:zzndb001.repo' && \
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r Librewolf && \
+    $ZYP_COMMAND dist-upgrade --from Librewolf -y --allow-vendor-change  && \
+    $ZYP_COMMAND install -y --allow-vendor-change -r Librewolf LibreWolf
 
-sudo zypper -n --no-cd addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman && \
-    sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r packman && \
-    sudo zypper -n --no-cd dist-upgrade --from packman -y --allow-vendor-change --auto-agree-with-licenses && \
-    sudo zypper -n --no-cd install --from packman -y --auto-agree-with-licenses ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+}
 
-echo "Microsoft" ; echo "Edge"
+function codecs {
+    echo "Codecs"
+    # shellcheck disable=SC2016
+    $ZYP_COMMAND addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/$releasever/' packman && \
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r packman && \
+    $ZYP_COMMAND dist-upgrade --from packman -y --allow-vendor-change --auto-agree-with-licenses && \
+    $ZYP_COMMAND install --from packman -y --auto-agree-with-licenses ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+}
 
-curl -LOs https://packages.microsoft.com/keys/microsoft.asc
-sudo rpm --import "$(awk -F / '{print $NF}' <(echo 'https://packages.microsoft.com/keys/microsoft.asc'))"
+function ms-key {
+    echo "Microsoft"
+    curl -LOs $MS_KEY_URL
+    sudo rpm --import "$(awk -F / '{print $NF}' <(echo "$MS_KEY_URL"))"
+}
 
-sudo zypper -n --no-cd addrepo -cf 'https://packages.microsoft.com/yumrepos/edge/' ms-edge && \
-    sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r ms-edge && \
-    sudo zypper -n --no-cd install -y --auto-agree-with-licenses -r ms-edge microsoft-edge-stable
+function edge {
+    echo "Edge"
+    $ZYP_COMMAND addrepo -cf 'https://packages.microsoft.com/yumrepos/edge/' ms-edge && \
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r ms-edge && \
+    $ZYP_COMMAND install -y --auto-agree-with-licenses -r ms-edge microsoft-edge-stable
+}
 
-echo "Dotnet"
+function dotnet {
+    echo "Dotnet"
+    $ZYP_COMMAND addrepo -cf https://packages.microsoft.com/opensuse/15/prod/ dotnet &&
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r dotnet && \
+    $ZYP_COMMAND install -y --auto-agree-with-licenses dotnet\*7.0 aspnet\*7.0
+}
 
-sudo zypper -n --no-cd addrepo -cf https://packages.microsoft.com/opensuse/15/prod/ dotnet &&
-    sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r dotnet && \
-    sudo zypper -n --no-cd install -y --auto-agree-with-licenses dotnet\*7.0 aspnet\*7.0
-
-echo "Snap"
-
-sudo zypper -n --no-cd addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed' snappy && \
-    sudo zypper -n --no-cd --gpg-auto-import-keys refresh -r snappy && \
-    sudo zypper -n --no-cd dist-upgrade --from snappy -y && \
-    sudo zypper -n --no-cd install -r snappy snapd -y && \
+function snapd {
+    echo "Snap"
+    # shellcheck disable=SC2016
+    $ZYP_COMMAND addrepo -cf 'https://download.opensuse.org/repositories/system:/snappy/$releasever' snappy && \
+    $ZYP_COMMAND --gpg-auto-import-keys refresh -r snappy && \
+    $ZYP_COMMAND dist-upgrade --from snappy -y && \
+    $ZYP_COMMAND install -r snappy -y snapd && \
     sudo systemctl enable --now snapd
     sudo systemctl enable --now snapd.apparmor
+}
+
+REPO_LIST=$($ZYP_COMMAND --xmlout lr | $YQ_COMMAND '.stream.repo-list.repo')
+
+grep -i "librewolf" >/dev/null 2>&1 || librewolf
+grep -i "packman" >/dev/null 2>&1 || packman
+ms-key
+grep -i "edge" >/dev/null 2>&1 || ms-edge
+grep -i "dotnet" >/dev/null 2>&1 || dotnet
+grep -i "snappy" >/dev/null 2>&1 || snapd
+
