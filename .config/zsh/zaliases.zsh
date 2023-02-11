@@ -19,7 +19,7 @@ pdfcombine() {
 }
 
 pipenv-base() {
-  pipenv -v install --dev --pre black ipython pyright pylint coverage isort autoflake
+  pipenv -v install --dev yapf "pylama[all]" ipython pyright pylint coverage isort && pipenv -v install $@
 }
 
 startmlv() {

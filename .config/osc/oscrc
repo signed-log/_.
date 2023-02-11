@@ -47,9 +47,9 @@ apiurl = https://api.opensuse.org
 #build-vmdisk-swapsize = 1024
 # build-vmdisk-filesystem is the file system type of the disk-image used in a VM build
 # values are ext3(default) ext4 xfs reiserfs btrfs
-build-vmdisk-filesystem = btrfs
- ccache = 1
- sccache = 0
+# build-vmdisk-filesystem = btrfs
+# ccache = 0
+# sccache = 0
 # Numeric uid:gid to assign to the "abuild" user in the build-root
 # or "caller" to use the current users uid:gid
 # This is convenient when sharing the buildroot with ordinary userids
@@ -130,6 +130,6 @@ check_filelist = 1
 #       User: mumblegack
 # Plain text password
 #pass =
-trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide
+trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide Fedora:36
 user=stig124
 credentials_mgr_class=osc.credentials.KeyringCredentialsManager:keyring.backends.SecretService.Keyring
