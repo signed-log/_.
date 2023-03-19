@@ -23,22 +23,22 @@ apiurl = https://api.opensuse.org
 #   experimental:
 #     qemu -  qemu VM build
 #     lxc  -  lxc build
-#build-type =
+build-type = kvm
 # Execute always a shell prompt on build failure inside of the build environment
 #build-shell-after-fail = 1
 # build-device is the disk-image file to use as root for VM builds
 # e.g. /var/tmp/FILE.root
-#build-device = /var/tmp/FILE.root
+build-device = /var/tmp/build.root
 # build-swap is the disk-image to use as swap for VM builds
 # e.g. /var/tmp/FILE.swap
-#build-swap = /var/tmp/FILE.swap
+build-swap = /var/tmp/build.swap
 # build-kernel is the boot kernel used for VM builds
 #build-kernel = /boot/vmlinuz
 # build-initrd is the boot initrd used for VM builds
 #build-initrd = /boot/initrd
 # build-memory is the amount of memory used in the VM
 # value in MB - e.g. 512
-#build-memory = 512
+build-memory = 2048
 # build-vmdisk-rootsize is the size of the disk-image used as root in a VM build
 # values in MB - e.g. 4096
 #build-vmdisk-rootsize = 4096
@@ -47,7 +47,7 @@ apiurl = https://api.opensuse.org
 #build-vmdisk-swapsize = 1024
 # build-vmdisk-filesystem is the file system type of the disk-image used in a VM build
 # values are ext3(default) ext4 xfs reiserfs btrfs
-# build-vmdisk-filesystem = btrfs
+build-vmdisk-filesystem = ext4
 # ccache = 0
 # sccache = 0
 # Numeric uid:gid to assign to the "abuild" user in the build-root
@@ -130,6 +130,6 @@ check_filelist = 1
 #       User: mumblegack
 # Plain text password
 #pass =
-trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide Fedora:36
+trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide Fedora:36 openSUSE:Tumbleweed:OldKey
 user=stig124
 credentials_mgr_class=osc.credentials.KeyringCredentialsManager:keyring.backends.SecretService.Keyring

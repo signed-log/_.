@@ -19,7 +19,7 @@ pdfcombine() {
 }
 
 pipenv-base() {
-  pipenv -v install --dev yapf "pylama[all]" ipython pyright pylint coverage isort && pipenv -v install $@
+  pipenv -v install --dev yapf pre-commit ruff ipython pyright pylint coverage && pipenv -v install $@
 }
 
 startmlv() {

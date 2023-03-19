@@ -13,7 +13,6 @@
 *.sig
 
 pkg/
-src/
 
 ### C ###
 # Prerequisites
