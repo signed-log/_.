@@ -48,7 +48,7 @@ build-memory = 2048
 # build-vmdisk-filesystem is the file system type of the disk-image used in a VM build
 # values are ext3(default) ext4 xfs reiserfs btrfs
 build-vmdisk-filesystem = ext4
-# ccache = 0
+ccache = 1
 # sccache = 0
 # Numeric uid:gid to assign to the "abuild" user in the build-root
 # or "caller" to use the current users uid:gid
@@ -70,7 +70,7 @@ build-vmdisk-filesystem = ext4
 # dependency problems when the base distro is not providing the package.
 # => using server side definition via cli_debug_packages substitute rule is
 #    recommended therefore.
-#extra-pkgs = 
+extra-pkgs = gdb less mc strace tmux tree unzip vim
 # build platform is used if the platform argument is omitted to osc build
 #build_repository = openSUSE_Factory
 # default project for getpac or bco
@@ -78,7 +78,7 @@ build-vmdisk-filesystem = ext4
 # alternate filesystem layout: have multiple subdirs, where colons were.
 checkout_no_colon = 1
 # change filesystem layout: avoid checkout within a project or package dir.
-#checkout_rooted = 0
+checkout_rooted = 1
 # local files to ignore with status, addremove, ....
 exclude_glob = .osc CVS .svn .* _linkerror *~ #*# *.orig *.bak *.changes.vctmp.* *.obscpio
 # limit the age of requests shown with 'osc req list'.

@@ -50,8 +50,9 @@ function zyp {
     "nnn"
     "obs-service*"
     "flatpak"
+    "python3-pip"
   )
-  $ZYP_COMMAND install -y --auto-agree-with-licenses "${ZYP_APPS[@]}"
+  $ZYP_COMMAND install -y --auto-agree-with-licenses --ignore-unknown "${ZYP_APPS[@]}"
   remove-and-lock
 }
 
@@ -68,14 +69,50 @@ function fpk {
 
 function snapd {
   sudo snap install discord
-  sudo snap install telegram-desktop --edge
+  sudo snap install telegram-desktop
+}
+
+function gext {
+  GNOME_EXTS=(
+    "caffeine@patapon.info"
+    "advanced-alt-tab@G-dH.github.com"
+    "appindicatorsupport@rgcjonas.gmail.com"
+    "BingWallpaper@ineffable-gmail.com"
+    "just-perfection-desktop@just-perfection"
+  )
+  gnome-extensions-cli install "${GNOME_EXTS[@]}"
+}
+
+function pippkg {
+  PIP_PACKAGES=(
+    "gnome-extensions-cli"
+    "spec-cleaner"
+    "ipython"
+  )
+  pip install --user --upgrade "${PIP_PACKAGES[@]}"
 }
 
 function pwsh {
   dotnet tool install --global PowerShell
 }
 
+function 64gram {
+  VERSION="1.0.81"
+  URL="https://github.com/TDesktop-x64/tdesktop/releases/download/v${VERSION}/64Gram_${VERSION}_linux.zip"
+  TMPDIR=$(mktemp -d)
+  INSTALL_DIR="$HOME/.local/opt/64Gram"
+  pushd "$TMPDIR"
+  mkdir -p "$INSTALL_DIR"
+  curl -LOJ "$URL"
+  bsdtar -xf "$(awk -F / '{print $NF}' <(echo "$URL"))"
+  cp Telegram Updater "$INSTALL_DIR"
+  ln -s "$INSTALL_DIR/Telegram" "$HOME/.local/bin"
+  ln -s "$INSTALL_DIR/Updater" "$HOME/.local/bin"
+}
+
 command -v zypper >/dev/null 2>&1 && zyp
 command -v flatpak >/dev/null 2>&1 && fpk
 command -v snap >/dev/null 2>&1 && snapd
 command -v dotnet >/dev/null 2>&1 && pwsh
+command -v curl >/dev/null 2>&1 && 64gram
+command -v pip >/dev/null 2>&1 && pippkg && gext

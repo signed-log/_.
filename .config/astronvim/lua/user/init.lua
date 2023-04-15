@@ -9,14 +9,14 @@ local config = {
 	-- Configure AstroNvim updates
 	updater = {
 		remote = "origin", -- remote to use
-		channel = "nightly", -- "stable" or "nightly"
-		version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+		channel = "stable", -- "stable" or "nightly"
+		version = "", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
 		branch = "main", -- branch name (NIGHTLY ONLY)
 		commit = nil, -- commit hash (NIGHTLY ONLY)
 		pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
 		skip_prompts = false, -- skip prompts about breaking changes
 		show_changelog = true, -- show the changelog after performing an update
-		auto_reload = false, -- automatically reload and sync packer after a successful update
+		auto_reload = true, -- automatically reload and sync packer after a successful update
 		auto_quit = false, -- automatically quit the current session after a successful update
 		-- remotes = { -- easily add new remotes to track
 		--   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
@@ -195,11 +195,11 @@ local config = {
 			--     require("lsp_signature").setup()
 			--   end,
 			-- },
-			{ "wakatime/vim-wakatime" },
-			-- { "editorconfig/editorconfig-vim" },
+			-- { "wakatime/vim-wakatime" },
+			{ "editorconfig/editorconfig-vim" },
 			-- { "pearofducks/ansible-vim" },
 
-			-- We also support a key value style plugin definition similar to NvChad:
+			-- We also support a key value styl plugin definition similar to NvChad:
 			-- ["ray-x/lsp_signature.nvim"] = {
 			--   event = "BufRead",
 			--   config = function()
@@ -221,15 +221,6 @@ local config = {
 			}
 			-- set up null-ls's on_attach function
 			-- NOTE: You can remove this on attach function to disable format on save
-			config.on_attach = function(client)
-				if client.resolved_capabilities.document_formatting then
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						desc = "Auto format before save",
-						pattern = "<buffer>",
-						callback = vim.lsp.buf.formatting_sync,
-					})
-				end
-			end
 			return config -- return final config table to use in require("null-ls").setup(config)
 		end,
 		treesitter = { -- overrides `require("treesitter").setup(...)`
@@ -301,6 +292,7 @@ local config = {
 			pattern = "plugins.lua",
 			command = "source <afile> | PackerSync",
 		})
+		vim.lsp.buf.formatting_seq_sync = false
 		-- Disable mouse
 		vim.api.nvim_command("set mouse=")
 		-- Set indentation

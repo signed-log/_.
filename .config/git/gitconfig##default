@@ -19,7 +19,7 @@
 
 [core]
   mergeoptions = --no-edit
-  autocrlf = input
+	autocrlf = false
   pager = less -FiR # -F is necessary but has problems with tmux and regular shells
   excludesfile = ~/.config/git/global_gitignore
   quotepath = false
@@ -47,13 +47,17 @@
   signOff = true
 
 [merge]
-  tool = merge3
-  conflictstyle = diff3
-
-[mergetool]
-  keepBackup = false
-  trustExitCode = false
-  prompt = true
+      tool = vscode
+[mergetool "vscode"]
+  # Comment: Original way before three-way merge shown commented out
+  #    cmd = code --wait $MERGED
+  # Comment: For "Three-way merge"
+  cmd = code-insiders --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[diff]
+  tool = vscode
+[difftool "vscode"]
+      cmd = code-insiders --wait --diff $LOCAL $REMOTE
+  # Comment: End of "Extra Block"
 
 [rebase]
   # automatically process "fixup!" commits when rebasing interactively

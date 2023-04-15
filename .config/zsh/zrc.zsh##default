@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 if [ -f $HOME/.config/zsh/zenv.zsh ]; then
   source $HOME/.config/zsh/zenv.zsh
 fi
@@ -39,7 +41,7 @@ zi snippet OMZP::firewalld
 
 # Python
 zi snippet OMZP::pip
-zi snippet OMZP::pipenv
+# zi snippet OMZP::pipenv
 zi snippet OMZP::python
 zi snippet OMZP::pylint
 
@@ -65,7 +67,7 @@ zi load buonomo/yarn-completion
 zi load chrissicool/zsh-256color
 zi load zsh-users/zsh-completions
 zi load lukechilds/zsh-better-npm-completion
-zi load lukechilds/zsh-nvm
+# zi load lukechilds/zsh-nvm
 zi load zsh-users/zsh-syntax-highlighting
 zi load z-shell/F-Sy-H
 zi load z-shell/H-S-MW
@@ -80,6 +82,12 @@ fi
 if command -v gh > /dev/null; then
   zi ice lucid wait as'completion' blockf has'gh'
   zi snippet "$HOME/.local/share/completions/_gh"
+fi
+
+if command -v pipenv > /dev/null; then
+  zi ice lucid wait as'completion' blocf has'pipenv'
+  _PIPENV_COMPLETE=zsh_source pipenv > "$HOME/.local/share/completions/_pipenv"
+  zi snippet "$HOME/.local/share/completions/_pipenv"
 fi
 
 setopt promptsubst
@@ -133,3 +141,21 @@ if [[ -d $HOME/.pyenv ]]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
+
+if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
+    eval $(ssh-agent -s) > /dev/null
+    if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
+        # Auto-add ssh keys to your ssh agent
+        # Example:
+        ssh-add ~/.ssh/id_ed25519_servers > /dev/null 2>&1
+        ssh-add ~/.ssh/id_ed25519_gitit > /dev/null 2>&1
+    fi
+fi
+
+
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
