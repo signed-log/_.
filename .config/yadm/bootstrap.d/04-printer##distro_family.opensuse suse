@@ -7,27 +7,30 @@ ZYP_COMMAND="sudo zypper -n --no-cd"
 
 TMPDIR="$(mktemp -d)"
 
+function prereq {
+$ZYP_COMMAND install -y cups cups-pdf cups-airprint cups-devel
+}
+
 function driver {
   DRIVER_URL="https://gdlp01.c-wss.com/gds/3/0100010483/01/cnijfilter2-5.90-1-rpm.tar.gz"
   DRIVER_FNAME=$(awk -F / '{print $NF}' <(echo "$DRIVER_URL"))
-  curl -LO $DRIVER_URL && tar -xf "$DRIVER_FNAME"
-  pushd "${DRIVER_FNAME%%.tar.gz}/packages"
+  curl -LO "$DRIVER_URL"
+  tar -xf "$DRIVER_FNAME"
+  pushd "${DRIVER_FNAME%%.tar.gz}/packages" >/dev/null || exit
   $ZYP_COMMAND install --allow-unsigned-rpm -y --auto-agree-with-licenses ./"${DRIVER_FNAME%%-rpm.tar.gz}.$(arch).rpm"
 }
 
 function scangear {
   SCANGEAR_URL="https://gdlp01.c-wss.com/gds/6/0100010486/01/scangearmp2-3.90-1-rpm.tar.gz"
   SCANGEAR_FNAME=$(awk -F / '{print $NF}' <(echo "$SCANGEAR_URL"))
-  curl -LO $SCANGEAR_URL && tar -xf "$SCANGEAR_FNAME"
-  pushd "${SCANGEAR_FNAME%%.tar.gz}/packages"
+  curl -LO "$SCANGEAR_URL"
+  tar -xf "$SCANGEAR_FNAME"
+  pushd "${SCANGEAR_FNAME%%.tar.gz}/packages" >/dev/null || exit
   $ZYP_COMMAND install --allow-unsigned-rpm -y --auto-agree-with-licenses ./"${SCANGEAR_FNAME%%-rpm.tar.gz}.$(arch).rpm"
 }
 
-$ZYP_COMMAND install -y cups cups-pdf cups-airprint cups-devel
-
-pushd "$TMPDIR"
+pushd "$TMPDIR" >/dev/null || exit
 driver
-popd
 scangear
 printf "Install the printer in localhost:631"
 xdg-open "http://localhost:631"

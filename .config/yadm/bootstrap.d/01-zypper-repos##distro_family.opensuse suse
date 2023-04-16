@@ -10,8 +10,6 @@ pushd "$TMPDIR"
 ZYP_COMMAND="sudo zypper -n --no-cd"
 YQ_COMMAND="yq -p=xml"
 
-MS_KEY_URL="https://packages.microsoft.com/keys/microsoft.asc"
-
 $ZYP_COMMAND refresh
 command -v yq >/dev/null 2>&1 || $ZYP_COMMAND install -y jq yq
 
@@ -32,8 +30,9 @@ function codecs {
 }
 
 function ms-key {
+  MS_KEY_URL="https://packages.microsoft.com/keys/microsoft.asc"
   echo "Microsoft"
-  curl -LOs $MS_KEY_URL
+  curl -LOs "$MS_KEY_URL"
   sudo rpm --import "$(awk -F / '{print $NF}' <(echo "$MS_KEY_URL"))"
 }
 
@@ -70,9 +69,9 @@ function snapd {
 
 REPO_LIST=$($ZYP_COMMAND --xmlout lr | $YQ_COMMAND '.stream.repo-list.repo')
 
+ms-key
 grep -i "librewolf" <<<"$REPO_LIST" >/dev/null 2>&1 || librewolf
 grep -i "packman" <<<"$REPO_LIST" >/dev/null 2>&1 || codecs
-ms-key
 grep -i "edge" <<<"$REPO_LIST" >/dev/null 2>&1 || edge
 grep -i "dotnet" <<<"$REPO_LIST" >/dev/null 2>&1 || dotnet
 grep -i "snappy" <<<"$REPO_LIST" >/dev/null 2>&1 || snapd

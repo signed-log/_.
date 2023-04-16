@@ -11,9 +11,11 @@ fi
 # Install and enable ZI
 declare -Ag ZI
 ZI[BIN_DIR]="${XDG_CONFIG_HOME:-${HOME}/.config}/zi/bin"
-command mkdir -pv "${ZI[BIN_DIR]}"
-command chmod -v g-rwX "${ZI[BIN_DIR]}"
-command git clone --verbose https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+if [[ ! -d ${ZI[BIN_DIR]} ]]; then
+	mkdir -p "${ZI[BIN_DIR]}"
+	chmod g-rwX "${ZI[BIN_DIR]}"
+	git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+fi
 
 
 if command -v restic; then

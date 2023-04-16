@@ -1,0 +1,61 @@
+#!/usr/bin/bash
+# vim: ft=bash
+
+set -euo pipefail
+
+UDEV_DIR="$HOME/.config/udev"
+UDEV_RULES=()
+
+mkdir -p "$UDEV_DIR"
+
+# N-Link rules
+function nlink {
+  FNAME="69-n-link.rules"
+  cat <<EOF >"$UDEV_DIR/$FNAME"
+# TI-Nspire
+SUBSYSTEM=="usb", ATTR{idVendor}=="0451", ATTR{idProduct}=="e012", ENV{ID_PDA}="1"
+# TI-Nspire CX II
+SUBSYSTEM=="usb", ATTR{idVendor}=="0451", ATTR{idProduct}=="e022", ENV{ID_PDA}="1"
+EOF
+}
+
+# Quartus
+
+function quartus {
+  FNAME="51-usbblaster.rules"
+  cat <<EOF >"$UDEV_DIR/$FNAME"
+# Intel FPGA Download Cable
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6001", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6002", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6003", MODE="0666"
+
+# Intel FPGA Download Cable II
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6010", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6810", MODE="0666"
+EOF
+  UDEV_RULES+=("$FNAME")
+}
+
+# STLink
+
+function stlink {
+  STLINK_URLS=(
+    "https://raw.githubusercontent.com/stlink-org/stlink/develop/config/udev/rules.d/49-stlinkv1.rules"
+    "https://raw.githubusercontent.com/stlink-org/stlink/develop/config/udev/rules.d/49-stlinkv2-1.rules"
+    "https://raw.githubusercontent.com/stlink-org/stlink/develop/config/udev/rules.d/49-stlinkv2.rules"
+    "https://raw.githubusercontent.com/stlink-org/stlink/develop/config/udev/rules.d/49-stlinkv3.rules"
+  )
+  TMPDIR="$(mktemp -d)"
+  pushd "$TMPDIR" || exit
+  wget "${STLINK_URLS[@]}"
+  for f in *; do
+    cp "$f" "$UDEV_DIR"
+    UDEV_RULES+=("$f")
+  done
+}
+
+sudo cp "$UDEV_DIR/${UDEV_RULES[*]}" /etc/udev/rules.d/
+
+sudo udevadm control --reload-rules && sudo udevadm trigger

@@ -16,8 +16,8 @@ function remove-and-lock {
     "python-base"
     "gnome-software"
   )
-  $ZYP_COMMAND --ignore-unknown rm -y "${to_lock[@]}"
-  $ZYP_COMMAND --ignore-unknown al "${to_lock[@]}"
+  $ZYP_COMMAND --ignore-unknown remove -y "${to_lock[@]}"
+  $ZYP_COMMAND --ignore-unknown addlock "${to_lock[@]}"
 }
 
 function zyp {
@@ -68,8 +68,11 @@ function fpk {
 }
 
 function snapd {
-  sudo snap install discord
-  sudo snap install telegram-desktop
+  SNAP_APPS=(
+    "discord"
+    "telegram-desktop"
+  )
+  sudo snap install "${SNAP_APPS[@]}"
 }
 
 function gext {
@@ -101,7 +104,7 @@ function 64gram {
   URL="https://github.com/TDesktop-x64/tdesktop/releases/download/v${VERSION}/64Gram_${VERSION}_linux.zip"
   TMPDIR=$(mktemp -d)
   INSTALL_DIR="$HOME/.local/opt/64Gram"
-  pushd "$TMPDIR"
+  pushd "$TMPDIR" >/dev/null || exit
   mkdir -p "$INSTALL_DIR"
   curl -LOJ "$URL"
   bsdtar -xf "$(awk -F / '{print $NF}' <(echo "$URL"))"
