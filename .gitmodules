@@ -7,6 +7,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "/home/signed/.config/nvim"]
-	path = /home/signed/.config/nvim
+[submodule ".config/nvim"]
+	path = .config/nvim
 	url = https://github.com/AstroNvim/AstroNvim
