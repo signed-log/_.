@@ -130,6 +130,6 @@ check_filelist = 1
 #       User: mumblegack
 # Plain text password
 #pass =
-trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide Fedora:36 openSUSE:Tumbleweed:OldKey
+trusted_prj=openSUSE:Tumbleweed openSUSE:Factory Base:System network Fedora:35 OBS:DefaultKernel openSUSE:Tools Fedora:Rawhide Fedora:36 openSUSE:Tumbleweed:OldKey Arch:Core Arch:Extra Arch:Community utilities
 user=stig124
 credentials_mgr_class=osc.credentials.KeyringCredentialsManager:keyring.backends.SecretService.Keyring

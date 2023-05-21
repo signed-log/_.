@@ -84,6 +84,11 @@ if command -v gh > /dev/null; then
   zi snippet "$HOME/.local/share/completions/_gh"
 fi
 
+if command -v pipenv > /dev/null; then
+  zi ice lucid wait as'completion' blockf has'pipenv'
+  zi snippet "$HOME/.local/share/completions/_pipenv"
+fi
+
 setopt promptsubst
 
 zi snippet OMZL::prompt_info_functions.zsh

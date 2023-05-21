@@ -2,6 +2,7 @@ export SPICETIFY_INSTALL="$HOME/.spicetify"
 export PATH=$HOME/.emacs.d/bin:$HOME/.cargo/bin:$SPICETIFY_INSTALL:$HOME/.local/bin:$HOME/.local/bin/misc/:$HOME/bin:/usr/local/bin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export GDB_HISTFILE="$HOME/.gdb_history"
+export ZSH_CACHE_DIR="$HOME/.local/share"
 # export DOOMDIR="${XDG_CONFIG_HOME:-${HOME}/.config}/doom"
 
 export VISUAL=nvim

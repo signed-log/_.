@@ -23,3 +23,9 @@ if command -v gh; then
   command mkdir -p "$HOME/.local/share/completions/"
   gh completion --shell zsh > "$HOME/.local/share/completions/_gh"
 fi
+
+if command -v pipenv; then
+  command mkdir -p "$HOME/.local/share/completions/"
+  _PIPENV_COMPLETE=zsh_source pipenv > "$HOME/.local/share/completions/_pipenv"
+fi
+
