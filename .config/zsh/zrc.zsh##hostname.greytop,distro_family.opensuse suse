@@ -26,7 +26,6 @@ zi cdclear -q
 
 # Git [Addons]
 zi snippet OMZP::git-extras
-# zi snippet OMZP::gh
 zi snippet OMZP::git-lfs
 
 if [[ $OSVER == *"SUSE"* ]]; then
@@ -34,8 +33,6 @@ if [[ $OSVER == *"SUSE"* ]]; then
 fi
 
 # GPG/SSH/Security
-# zi snippet OMZP::gpg-agent
-# zi snippet OMZP::ssh-agent
 zi snippet OMZP::safe-paste
 zi snippet OMZP::firewalld
 
@@ -93,9 +90,6 @@ setopt promptsubst
 
 zi snippet OMZL::prompt_info_functions.zsh
 zi snippet OMZL::theme-and-appearance.zsh
-# zi snippet OMZT::3den
-# Patched theme to display 24h time
-# zi snippet "https://github.com/signed-log/ohmyzsh/blob/24h-time/themes/mikeh.zsh-theme"
 
 if [ -f $HOME/.config/zsh/zaliases.zsh ]; then
   source $HOME/.config/zsh/zaliases.zsh
