@@ -1,9 +1,6 @@
 [submodule ".local/bin/misc"]
 	path = .local/bin/misc
 	url = https://github.com/signed-log/misc.git
-[submodule ".emacs.d"]
-	path = .emacs.d
-	url = https://github.com/doomemacs/doomemacs
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git

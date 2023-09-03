@@ -7,7 +7,7 @@ TMPDIR="$(mktemp -d)"
 
 pushd "$TMPDIR"
 
-ZYP_COMMAND="sudo zypper -n --no-cd"
+ZYP_COMMAND="sudo zypper -n --no-cd --ignore-unknown --userdata yadmbootstrap"
 YQ_COMMAND="yq -p=xml"
 
 $ZYP_COMMAND refresh
@@ -75,3 +75,4 @@ grep -i "packman" <<<"$REPO_LIST" >/dev/null 2>&1 || codecs
 grep -i "edge" <<<"$REPO_LIST" >/dev/null 2>&1 || edge
 grep -i "dotnet" <<<"$REPO_LIST" >/dev/null 2>&1 || dotnet
 grep -i "snappy" <<<"$REPO_LIST" >/dev/null 2>&1 || snapd
+grep -i "vscode" <<<"$REPO_LIST" >/dev/null 2>&1 || vscode

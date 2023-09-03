@@ -4,12 +4,12 @@
 set -euo pipefail
 
 TMPDIR="$(mktemp -d)"
-BUILD="1.27.3.14493"
-# Updated on 2023-04-15
+BUILD="2.0.2.16660"
+# Updated on 2023-09-03
 URL="https://download.jetbrains.com/toolbox/jetbrains-toolbox-$BUILD.tar.gz"
 FNAME=$(awk -F / '{print $NF}' <(echo "$URL"))
 
-pushd "$TMPDIR" >/dev/null || exit
+pushd "$TMPDIR" > /dev/null || exit
 curl -LO "$URL" && tar -xf "$FNAME"
 
 mkdir -p "$HOME"/.local/bin/

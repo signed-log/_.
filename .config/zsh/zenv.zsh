@@ -12,7 +12,7 @@ export DISABLE_AUTO_TITLE='true'
 export MONITOR=all
 
 if command -v batman >/dev/null 2>&1 && command -v bat >/dev/null 2>&1; then
-  export MANPAGER="batman"
+  #export MANPAGER="batman"
 fi
 
 # Conditionals

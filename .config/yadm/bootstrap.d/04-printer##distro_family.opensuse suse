@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-ZYP_COMMAND="sudo zypper -n --no-cd"
+ZYP_COMMAND="sudo zypper -n --no-cd --ignore-unknown --userdata yadmbootstrap"
 
 TMPDIR="$(mktemp -d)"
 
@@ -33,4 +33,4 @@ pushd "$TMPDIR" >/dev/null || exit
 driver
 scangear
 printf "Install the printer in localhost:631"
-xdg-open "http://localhost:631"
+#xdg-open "http://localhost:631"
